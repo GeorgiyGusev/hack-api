@@ -7,6 +7,8 @@ info:
 tags:
   - name: Organizations
     description: Управление организациями
+  - name: News
+    description: Управление новостями
 
 paths:
   /organizations/user:
@@ -24,7 +26,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Organization"
-
   /organizations:
     get:
       tags:
@@ -59,7 +60,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Organization"
-
   /organizations/{id}:
     get:
       tags:
@@ -122,8 +122,6 @@ paths:
       responses:
         '204':
           description: Организация успешно удалена
-
-
   /organizations/moderation/reject:
     post:
       tags:
@@ -143,7 +141,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Organization"
-
   /organizations/moderation/approve:
     post:
       tags:
@@ -163,7 +160,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Organization"
-
   /organizations/status:
     get:
       tags:
@@ -186,9 +182,119 @@ paths:
                 items:
                   $ref: "#/components/schemas/Organization"
 
+  /news:
+    get:
+      tags:
+        - News
+      summary: GetAllNews
+      operationId: GetAllNews
+      responses:
+        '200':
+          description: Успешный запрос
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/News"
+    post:
+      tags:
+        - News
+      summary: CreateNews
+      operationId: CreateNews
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateNews"
+      responses:
+        '200':
+          description: Успешный запрос
+  /news/{id}:
+    get:
+      tags:
+        - News
+      summary: GetAllNewsById
+      operationId: GetNewsById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор новости
+          schema:
+            type: string
+
+      responses:
+        '200':
+          description: Успешный запрос
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/News"
+
 
 components:
   schemas:
+    CreateNews:
+      type: object
+      properties:
+        media:
+          type: array
+          items:
+            type: string
+            format: uuid
+            description: "Идентификатор медиа файла в формате UUID"
+          description: "Список медиа файлов"
+        title:
+          type: string
+          description: Заголовок новости
+        description:
+          type: string
+          description: Полное описание новости
+        organization_id:
+          type: string
+          format: uuid
+          description: Id организации, которая выпустила пост
+      required:
+        - media
+        - title
+        - description
+        - organization_id
+    News:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Id новости
+        media:
+          type: array
+          items:
+            type: string
+            format: uuid
+            description: "Идентификатор медиа файла в формате UUID"
+          description: "Список медиа файлов"
+        publish_data:
+          type: string
+          format: date
+          description: Дата публикации
+        title:
+          type: string
+          description: Заголовок новости
+        description:
+          type: string
+          description: Полное описание новости
+        organization_id:
+          type: string
+          format: uuid
+          description: Id организации, которая выпустила пост
+      required:
+        - id
+        - media
+        - publish_data
+        - title
+        - description
+        - organization_id
     GetOrganizationsByStatus:
       type: object
       properties:
