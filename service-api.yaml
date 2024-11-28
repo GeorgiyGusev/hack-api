@@ -1,0 +1,278 @@
+openapi: 3.0.0
+info:
+  title: MininCode API
+  description: API для работы с организациями на платформе "MininCode"
+  version: 1.0.0
+
+tags:
+  - name: Organizations
+    description: Управление организациями
+
+paths:
+  /organizations:
+    get:
+      tags:
+        - Organizations
+      summary: Получить список всех организаций
+      responses:
+        '200':
+          description: Успешный запрос
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Organization"
+
+    post:
+      tags:
+        - Organizations
+      summary: Добавить новую организацию
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrganizationCreate"
+      responses:
+        '201':
+          description: Организация успешно создана
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Organization"
+
+  /organizations/{id}:
+    get:
+      tags:
+        - Organizations
+      summary: Получить информацию об организации по ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор организации
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Успешный запрос
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Organization"
+
+    put:
+      tags:
+        - Organizations
+      summary: Обновить информацию об организации
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор организации
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrganizationUpdate"
+      responses:
+        '200':
+          description: Информация об организации успешно обновлена
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Organization"
+
+    delete:
+      tags:
+        - Organizations
+      summary: Удалить организацию
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор организации
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Организация успешно удалена
+
+
+  /organizations/moderation/reject:
+    post:
+      tags:
+        - Organizations
+      summary: Отклонить организацию
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModerationReject"
+      responses:
+        '200':
+          description: Организация успешно отклонена
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Organization"
+
+  /organizations/moderation/approve:
+    post:
+      tags:
+        - Organizations
+      summary: Одобрить организацю
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModerationApprove"
+      responses:
+        '200':
+          description: Организация успешно принята
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Organization"
+
+
+components:
+  schemas:
+    Organization:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Уникальный идентификатор организации
+        photo_id:
+          type: string
+          format: uuid
+          description: ID фотографии
+          nullable: true
+        title:
+          type: string
+          description: Название организации
+        description:
+          type: string
+          description: Подробное описание организации
+        phone:
+          type: string
+          format: phone
+          description: Контактный телефон
+          example: "+7-920-667-19-79"
+        email:
+          type: string
+          format: email
+          description: Электронная почта
+          example: org@example.com
+        latitude:
+          type: number
+          format: float
+          description: Географическая широта
+          example: 56.3269
+        longitude:
+          type: number
+          format: float
+          description: Географическая долгота
+          example: 44.0075
+        status:
+          type: string
+          enum: [ pending, approved, rejected ]
+          description: Статус организации
+          example: pending
+
+    OrganizationCreate:
+      type: object
+      properties:
+        photo_id:
+          type: string
+          format: uuid
+          description: ID фотографии
+          nullable: true
+        title:
+          type: string
+          description: Название организации
+        description:
+          type: string
+          description: Подробное описание организации
+        phone:
+          type: string
+          format: phone
+          description: Контактный телефон
+          example: "+7-920-667-19-79"
+        email:
+          type: string
+          format: email
+          description: Электронная почта
+          example: org@example.com
+        latitude:
+          type: number
+          format: float
+          description: Географическая широта
+          example: 56.3269
+        longitude:
+          type: number
+          format: float
+          description: Географическая долгота
+          example: 44.0075
+
+    OrganizationUpdate:
+      type: object
+      properties:
+        photo_id:
+          type: string
+          format: uuid
+          description: ID фотографии
+          nullable: true
+        title:
+          type: string
+          description: Название организации
+        description:
+          type: string
+          description: Подробное описание организации
+        phone:
+          type: string
+          format: phone
+          description: Контактный телефон
+          example: "+7-920-667-19-79"
+        email:
+          type: string
+          format: email
+          description: Электронная почта
+          example: org@example.com
+        latitude:
+          type: number
+          format: float
+          description: Географическая широта
+          example: 56.3269
+        longitude:
+          type: number
+          format: float
+          description: Географическая долгота
+          example: 44.0075
+
+    ModerationReject:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID организации
+        reason:
+          type: string
+          description: Причина отклонения
+          example: "Недостаточно информации для подтверждения."
+
+    ModerationApprove:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID организации
+
