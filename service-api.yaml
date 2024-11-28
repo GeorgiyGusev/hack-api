@@ -9,6 +9,22 @@ tags:
     description: Управление организациями
 
 paths:
+  /organizations/user:
+    get:
+      tags:
+        - Organizations
+      summary: Получить список всех организаций для пользователя
+      operationId: GetAllOrganizationsForUser
+      responses:
+        '200':
+          description: Успешный запрос
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Organization"
+
   /organizations:
     get:
       tags:
@@ -184,6 +200,10 @@ components:
       type: object
       properties:
         id:
+          type: string
+          format: uuid
+          description: Уникальный идентификатор организации
+        owner_id:
           type: string
           format: uuid
           description: Уникальный идентификатор организации
