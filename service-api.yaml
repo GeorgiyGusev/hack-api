@@ -216,6 +216,7 @@ components:
           description: Статус организации
           example: pending
       required:
+        - id
         - photo_id
         - title
         - description
@@ -223,6 +224,7 @@ components:
         - email
         - latitude
         - longitude
+        - status
     OrganizationCreate:
       type: object
       properties:
