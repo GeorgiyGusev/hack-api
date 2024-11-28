@@ -14,6 +14,7 @@ paths:
       tags:
         - Organizations
       summary: Получить список всех организаций
+      operationId: GetAllOrganizations
       responses:
         '200':
           description: Успешный запрос
@@ -28,6 +29,7 @@ paths:
       tags:
         - Organizations
       summary: Добавить новую организацию
+      operationId: AddNewOrganization
       requestBody:
         required: true
         content:
@@ -47,6 +49,7 @@ paths:
       tags:
         - Organizations
       summary: Получить информацию об организации по ID
+      operationId: GetOrganizationById
       parameters:
         - name: id
           in: path
@@ -66,6 +69,7 @@ paths:
       tags:
         - Organizations
       summary: Обновить информацию об организации
+      operationId: UpdateOrganization
       parameters:
         - name: id
           in: path
@@ -91,6 +95,7 @@ paths:
       tags:
         - Organizations
       summary: Удалить организацию
+      operationId: DeleteOrganization
       parameters:
         - name: id
           in: path
@@ -108,6 +113,7 @@ paths:
       tags:
         - Organizations
       summary: Отклонить организацию
+      operationId: RejectOrganization
       requestBody:
         required: true
         content:
@@ -127,6 +133,7 @@ paths:
       tags:
         - Organizations
       summary: Одобрить организацю
+      operationId: ApproveOrganization
       requestBody:
         required: true
         content:
@@ -146,6 +153,7 @@ paths:
       tags:
         - Organizations
       summary: Получить организации по типу верификации
+      operationId: GetOrganizationByStatus
       requestBody:
         required: true
         content:
