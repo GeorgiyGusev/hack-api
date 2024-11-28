@@ -183,7 +183,7 @@ components:
           type: string
           format: uuid
           description: ID фотографии
-          nullable: false
+          nullable: true
         title:
           type: string
           description: Название организации
@@ -232,7 +232,7 @@ components:
           type: string
           format: uuid
           description: ID фотографии
-          nullable: false
+          nullable: true
         title:
           type: string
           description: Название организации
@@ -276,7 +276,7 @@ components:
           type: string
           format: uuid
           description: ID фотографии
-          nullable: false
+          nullable: true
         title:
           type: string
           description: Название организации
