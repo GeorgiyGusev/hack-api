@@ -325,6 +325,7 @@ components:
           example: "Недостаточно информации для подтверждения."
       required:
         - reason
+        - id
 
     ModerationApprove:
       type: object
