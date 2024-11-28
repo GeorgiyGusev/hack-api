@@ -141,9 +141,35 @@ paths:
               schema:
                 $ref: "#/components/schemas/Organization"
 
+  /organizations/status:
+    get:
+      tags:
+        - Organizations
+      summary: Получить организации по типу верификации
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetOrganizationsByStatus"
+      responses:
+        '200':
+          description: Организация успешно принята
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Organization"
+
 
 components:
   schemas:
+    GetOrganizationsByStatus:
+      type: object
+      properties:
+        status:
+          type: string
     Organization:
       type: object
       properties:
