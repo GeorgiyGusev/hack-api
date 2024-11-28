@@ -170,6 +170,8 @@ components:
       properties:
         status:
           type: string
+      required:
+        - status
     Organization:
       type: object
       properties:
@@ -213,7 +215,14 @@ components:
           enum: [ pending, approved, rejected ]
           description: Статус организации
           example: pending
-
+      required:
+        - photo_id
+        - title
+        - description
+        - phone
+        - email
+        - latitude
+        - longitude
     OrganizationCreate:
       type: object
       properties:
@@ -248,6 +257,15 @@ components:
           format: float
           description: Географическая долгота
           example: 44.0075
+      required:
+        - id
+        - photo_id
+        - title
+        - description
+        - phone
+        - email
+        - latitude
+        - longitude
 
     OrganizationUpdate:
       type: object
@@ -283,6 +301,15 @@ components:
           format: float
           description: Географическая долгота
           example: 44.0075
+      required:
+        - id
+        - photo_id
+        - title
+        - description
+        - phone
+        - email
+        - latitude
+        - longitude
 
     ModerationReject:
       type: object
@@ -294,6 +321,8 @@ components:
           type: string
           description: Причина отклонения
           example: "Недостаточно информации для подтверждения."
+      required:
+        - reason
 
     ModerationApprove:
       type: object
@@ -301,4 +330,6 @@ components:
         id:
           type: string
           description: ID организации
+      required:
+        - id
 
