@@ -265,6 +265,9 @@ components:
         message:
           type: string
           description: Сообщение
+          nullable: false
+      required:
+        - message
     CreateNews:
       type: object
       properties:
