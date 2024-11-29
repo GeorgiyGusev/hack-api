@@ -12,8 +12,29 @@ tags:
     description: Управление организациями
   - name: News
     description: Управление новостями
+  - name: Ai Chat
+    description: Взаимодействие с умным помощником
 
 paths:
+  /ai:
+    post:
+      tags:
+        - Ai Chat
+      summary: Написать умному помощнику
+      operationId: AiChat
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AiChatMessage"
+      responses:
+        '200':
+          description: Успешный запрос
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AiChatMessage"
+
   /organizations/user:
     get:
       tags:
@@ -238,6 +259,12 @@ paths:
 
 components:
   schemas:
+    AiChatMessage:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Сообщение
     CreateNews:
       type: object
       properties:
