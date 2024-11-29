@@ -4,6 +4,9 @@ info:
   description: API для работы с организациями на платформе "MininCode"
   version: 1.0.0
 
+servers:
+  - url: https://api.kowlad.ru
+
 tags:
   - name: Organizations
     description: Управление организациями
@@ -242,7 +245,6 @@ components:
           type: array
           items:
             type: string
-            format: uuid
             description: "Идентификатор медиа файла в формате UUID"
           description: "Список медиа файлов"
         title:
@@ -253,7 +255,6 @@ components:
           description: Полное описание новости
         organization_id:
           type: string
-          format: uuid
           description: Id организации, которая выпустила пост
       required:
         - media
@@ -265,18 +266,15 @@ components:
       properties:
         id:
           type: string
-          format: uuid
           description: Id новости
         media:
           type: array
           items:
             type: string
-            format: uuid
             description: "Идентификатор медиа файла в формате UUID"
           description: "Список медиа файлов"
         publish_data:
           type: string
-          format: date
           description: Дата публикации
         title:
           type: string
@@ -286,7 +284,6 @@ components:
           description: Полное описание новости
         organization_id:
           type: string
-          format: uuid
           description: Id организации, которая выпустила пост
       required:
         - id
@@ -307,15 +304,12 @@ components:
       properties:
         id:
           type: string
-          format: uuid
           description: Уникальный идентификатор организации
         owner_id:
           type: string
-          format: uuid
           description: Уникальный идентификатор организации
         photo_id:
           type: string
-          format: uuid
           description: ID фотографии
           nullable: true
         title:
@@ -326,22 +320,18 @@ components:
           description: Подробное описание организации
         phone:
           type: string
-          format: phone
           description: Контактный телефон
           example: "+7-920-667-19-79"
         email:
           type: string
-          format: email
           description: Электронная почта
           example: org@example.com
         latitude:
           type: number
-          format: float
           description: Географическая широта
           example: 56.3269
         longitude:
           type: number
-          format: float
           description: Географическая долгота
           example: 44.0075
         status:
@@ -364,7 +354,6 @@ components:
       properties:
         photo_id:
           type: string
-          format: uuid
           description: ID фотографии
           nullable: true
         title:
@@ -375,22 +364,18 @@ components:
           description: Подробное описание организации
         phone:
           type: string
-          format: phone
           description: Контактный телефон
           example: "+7-920-667-19-79"
         email:
           type: string
-          format: email
           description: Электронная почта
           example: org@example.com
         latitude:
           type: number
-          format: float
           description: Географическая широта
           example: 56.3269
         longitude:
           type: number
-          format: float
           description: Географическая долгота
           example: 44.0075
       required:
@@ -408,7 +393,6 @@ components:
       properties:
         photo_id:
           type: string
-          format: uuid
           description: ID фотографии
           nullable: true
         title:
@@ -419,22 +403,18 @@ components:
           description: Подробное описание организации
         phone:
           type: string
-          format: phone
           description: Контактный телефон
           example: "+7-920-667-19-79"
         email:
           type: string
-          format: email
           description: Электронная почта
           example: org@example.com
         latitude:
           type: number
-          format: float
           description: Географическая широта
           example: 56.3269
         longitude:
           type: number
-          format: float
           description: Географическая долгота
           example: 44.0075
       required:
